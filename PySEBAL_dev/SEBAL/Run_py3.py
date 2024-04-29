@@ -14,7 +14,6 @@ import traceback
 ##### For Windows SET THE PATH TO INPUT EXCEL SHEET #####
 path = sys.argv[1]
 lastRow = sys.argv[2]
-print ('%s' % lastRow)
 inputExcel = r"" + path + ""
 st = 2 # starting row number
 en = int(lastRow) # ending row number
