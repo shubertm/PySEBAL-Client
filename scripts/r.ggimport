@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+map_path=$1
+n=$(tr '/' '\n' <<< $map_path | wc -l)
+map_name=$(cut -d / -f $n <<< $map_path)
+output=$(cut -d . -f 1 <<< $map_name)
+grass --exec r.import input=$map_path output=$output -o --overwrite
+echo $output

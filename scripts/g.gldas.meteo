@@ -1,0 +1,37 @@
+#!/usr/bin/env sh
+
+# Shubert Munthali
+
+FOLDER=$1
+DATE=$2
+OUTPUT_FOLDER="${FOLDER}/PySEBAL_Weather"
+TRANS_FOLDER="${FOLDER}/Translated_Weather"
+
+if [ -e $TRANS_FOLDER ]
+  then
+    rm -d -R $TRANS_FOLDER
+fi
+mkdir "$TRANS_FOLDER"
+
+for parameter in "Psurf_f_inst" "Tair_f_inst" "Wind_f_inst" "SWdown_f_tavg" "Qair_f_inst"; do
+  PNAME=`cut -d _ -f 1 <<< "$parameter"`
+  for i in "00" "03" "06" "09" "12" "15" "18" "21"; do
+    gdal_translate NETCDF:"${FOLDER}/GLDAS_NOAH025_3H.A${DATE}.${i}00.021.nc4":${parameter} ${TRANS_FOLDER}/GLDAS_NOAH025_3H_${DATE}_${i}00_${PNAME}.tif
+    sh r.ggimport "${TRANS_FOLDER}/GLDAS_NOAH025_3H_${DATE}_${i}00_${PNAME}.tif"
+    sh r.mapconverter $DATE $i $PNAME
+    echo "Done processing $parameter at $i"
+  done
+  sh r.getinstmap $DATE $PNAME
+  sh r.getavgmap $DATE $PNAME
+  echo "Done processing $parameter"
+done
+
+if [ -e $OUTPUT_FOLDER ]
+  then
+    rm -d -R $OUTPUT_FOLDER
+fi
+mkdir "$OUTPUT_FOLDER"
+
+sh r.instmaps.resample $OUTPUT_FOLDER
+sh r.avgmaps.resample $OUTPUT_FOLDER
+sh g.cleanup

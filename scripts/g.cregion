@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+REGION=$1
+
+sh g.cleanup
+grass --exec r.import input=$REGION output="region" -o --overwrite
+grass --exec g.region raster="region" -p

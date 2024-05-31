@@ -1,0 +1,32 @@
+#!/usr/bin/env sh
+
+DATE=$1
+TIME=$2
+PNAME=$3
+
+if [ $PNAME == "Tair" ]; then
+  # Air temperature
+  grass --exec r.mapcalc "GLDAS_NOAH025_3H_${DATE}_${TIME}00_${PNAME}_deg = GLDAS_NOAH025_3H_${DATE}_${TIME}00_${PNAME} - 273.15" --overwrite
+fi
+
+if [ $PNAME == "Psurf" ]; then
+  # Pressure convert from pa to mb
+  grass --exec r.mapcalc "GLDAS_NOAH025_3H_${DATE}_${TIME}00_${PNAME}_mb = GLDAS_NOAH025_3H_${DATE}_${TIME}00_${PNAME} / 100" --overwrite
+fi
+
+if [ $PNAME == "Wind" ]; then
+  # Wind speed from 10m to 2m
+  grass --exec r.mapcalc "GLDAS_NOAH025_3H_${DATE}_${TIME}00_${PNAME}_2m = GLDAS_NOAH025_3H_${DATE}_${TIME}00_${PNAME} * (4.87 / log((67.8 * 10) - 5.42))" --overwrite
+fi
+
+if [ $PNAME == "Qair" ]; then
+  # Humidity according to the url: https://earthscience.stackexchange.com/questions/2360/how-do-i-convert-specific-humidity-to-relative-humidity
+  # Saturation vapour pressure
+  grass --exec r.mapcalc "es = 6.112 * exp((17.67 * GLDAS_NOAH025_3H_${DATE}_${TIME}00_Tair_deg) / (GLDAS_NOAH025_3H_${DATE}_${TIME}00_Tair_deg + 243.5))" --overwrite
+  # Vapour pressure
+  grass --exec r.mapcalc "e = (GLDAS_NOAH025_3H_${DATE}_${TIME}00_${PNAME} * GLDAS_NOAH025_3H_${DATE}_${TIME}00_Psurf_mb) / (0.378 * GLDAS_NOAH025_3H_${DATE}_${TIME}00_${PNAME} + 0.622)" --overwrite
+  # Calculate Relative humidity
+  grass --exec r.mapcalc "GLDAS_NOAH025_3H_${DATE}_${TIME}00_Rh1 = (e / es) * 100" --overwrite
+  # Remove outliers
+  grass --exec r.mapcalc "GLDAS_NOAH025_3H_${DATE}_${TIME}00_Rh = float(if(GLDAS_NOAH025_3H_${DATE}_${TIME}00_Rh1 > 100, 100, if(GLDAS_NOAH025_3H_${DATE}_${TIME}00_Rh1 < 0, 0, GLDAS_NOAH025_3H_${DATE}_${TIME}00_Rh1)))" --overwrite
+fi

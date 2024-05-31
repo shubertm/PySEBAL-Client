@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+FOLDER=$1
+
+for i in `grass --exec g.list type=raster pattern="*inst" map=.`; do
+  # Resample all instantaneous maps
+  grass --exec r.resamp.bspline input=$i output="${i}_interp" method=bicubic --overwrite
+  grass --exec r.out.gdal input="${i}_interp" output="${FOLDER}/${i}_interp.tif" --overwrite
+done

@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+FOLDER=$1
+
+ ## Resample all daily averages maps
+ for i in `grass --exec g.list type=raster pattern="*24" map=.`; do
+     grass --exec r.resamp.bspline input=$i output="${i}_interp" method=bicubic --overwrite
+     grass --exec r.out.gdal input="${i}_interp" output="${FOLDER}/${i}_interp.tif" --overwrite
+ done

@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+
+DATE=$1
+PNAME=$2
+
+if [ $PNAME == "Tair" ]; then
+   # Air temperature instantaneous
+  grass --exec r.mapcalc "GLDAS_NOAH025_3H_${DATE}_${PNAME}_inst = (GLDAS_NOAH025_3H_${DATE}_0600_${PNAME}_deg + GLDAS_NOAH025_3H_${DATE}_0900_${PNAME}_deg) / 2"
+fi
+
+if [ $PNAME == "SWdown" ]; then
+   # Shortwave radiation instantaneous
+  grass --exec r.mapcalc "GLDAS_NOAH025_3H_${DATE}_${PNAME}_inst = (GLDAS_NOAH025_3H_${DATE}_0600_${PNAME} + GLDAS_NOAH025_3H_${DATE}_0900_${PNAME}) / 2"
+fi
+
+if [ $PNAME == "Wind" ]; then
+  # Wind speed instantaneous
+  grass --exec r.mapcalc "GLDAS_NOAH025_3H_${DATE}_${PNAME}_inst = (GLDAS_NOAH025_3H_${DATE}_0600_${PNAME}_2m + GLDAS_NOAH025_3H_${DATE}_0900_${PNAME}_2m) / 2"
+fi
+
+if [ $PNAME == "Qair" ]; then
+  # Relative humidity instantaneous
+  grass --exec r.mapcalc "GLDAS_NOAH025_3H_${DATE}_Rh_inst = (GLDAS_NOAH025_3H_${DATE}_0600_Rh + GLDAS_NOAH025_3H_${DATE}_0900_Rh) / 2"
+fi

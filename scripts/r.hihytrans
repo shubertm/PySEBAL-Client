@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+MAP=$1
+OUTPUT_FOLDER=$2
+
+grass --exec r.mapcalc "${MAP}_0.0001 = ${MAP} * 0.0001" --overwrite
+grass --exec r.out.gdal input="${MAP}_0.0001" output="${OUTPUT_FOLDER}/${MAP}_0.0001.tif" --overwrite

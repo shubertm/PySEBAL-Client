@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+INPUT=$1
+OUTPUT=$2
+INPUT_RASTER=$3
+qgis_process run native:zonalstatisticsfb --distance_units=meters --area_units=m2 --ellipsoid=EPSG:7030 --INPUT=$INPUT --INPUT_RASTER=$INPUT_RASTER --RASTER_BAND=1 --COLUMN_PREFIX=_ --STATISTICS=2 --OUTPUT=$OUTPUT

@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+FOLDER=$1
+OUTPUT_FOLDER="${FOLDER}/Translated"
+
+REGION=$2
+
+if [ -e $OUTPUT_FOLDER ]
+  then
+    rm -d -R $OUTPUT_FOLDER
+fi
+mkdir "$OUTPUT_FOLDER"
+
+sh grass_region $REGION
+
+ALL_MAP_PATHS=`ls $FOLDER/*.tif`
+
+for map_path in $ALL_MAP_PATHS; do
+  map_name=$(sh r.ggimport $map_path)
+  echo $map_name
+  sh r.hihytrans $map_name $OUTPUT_FOLDER
+done
+
+sh g.cleanup
+

@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+
+DATE=$1
+PNAME=$2
+
+if [ $PNAME == "Tair" ]; then
+  # Air temperature daily average
+  TEMP_MAPS=`grass --exec g.list type=raster pattern="GLDAS_NOAH025_3H_${DATE}_*_Tair_deg" sep=, map=.|cat`
+  grass  --exec r.series input=$TEMP_MAPS output="GLDAS_NOAH025_3H_${DATE}_Tair_24" method=average --overwrite
+fi
+
+# Short wave radiation daily average
+SWR_MAPS=`grass --exec g.list rast pattern="GLDAS_NOAH025_3H_${DATE}_*_SWdown" sep=, map=.|cat`
+grass --exec r.series input=$SWR_MAPS output="GLDAS_NOAH025_3H_${DATE}_SWdown_24" method=average --overwrite
+
+# Wind daily average
+WIND_MAPS=`grass --exec g.list rast pattern="GLDAS_NOAH025_3H_${DATE}_*_Wind_2m" sep=, map=.|cat`
+grass --exec r.series input=$WIND_MAPS output="GLDAS_NOAH025_3H_${DATE}_Wind_24" method=average --overwrite
+
+# Relative humidity daily average
+RH_MAPS=`grass --exec g.list rast pattern="GLDAS_NOAH025_3H_${DATE}_*_Rh" sep=, map=.|cat`
+grass --exec r.series input=$RH_MAPS output="GLDAS_NOAH025_3H_${DATE}_Rh_24" method=average --overwrite

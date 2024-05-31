@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+FOLDER=$1
+DATE=$2
+TIME=$3
+PNAME=$4
+
+input="${FOLDER}/GLDAS_NOAH025_3H_${DATE}_${TIME}00_${PNAME}.tif"
+output="GLDAS_NOAH025_3H_${DATE}_${TIME}00_${PNAME}"
+grass --exec r.import input=$input output=$output -o --overwrite

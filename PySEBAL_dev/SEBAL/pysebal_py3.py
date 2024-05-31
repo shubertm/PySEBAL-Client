@@ -1094,7 +1094,7 @@ def SEBALcode(number,inputExcel):
         print('  Upper Left corner x, y: ', ulx, ', ',  uly)
         print('  Lower right corner x, y: ', lrx, ', ', lry)
        
-        # output names for resampling
+        # output names for inst_resampling
         dst_LandsatMask = os.path.join(output_folder, 'Output_temporary', '%s_cropped_LANDSATMASK_%s_%s_%s.tif' %(sensor1, res1, year, DOY))
 
         # Open Landsat data only if all additional data is not defined.
@@ -3807,7 +3807,7 @@ def reproject_dataset(dataset, pixel_spacing, UTM_Zone):
     dest.SetGeoTransform(new_geo)
     dest.SetProjection(osng.ExportToWkt())
       
-    # Perform the projection/resampling
+    # Perform the projection/inst_resampling
     gdal.ReprojectImage(g, dest, wgs84.ExportToWkt(), osng.ExportToWkt(),gdal.GRA_Bilinear)						
 
     return dest, ulx, lry, lrx, uly, epsg_to
@@ -3853,7 +3853,7 @@ def reproject_dataset_example(dataset, dataset_example, method = 1):
     dest1.SetGeoTransform(Geo)
     dest1.SetProjection(osng.ExportToWkt())
     
-    # Perform the projection/resampling
+    # Perform the projection/inst_resampling
     if method == 1:
         gdal.ReprojectImage(g_in, dest1, wgs84.ExportToWkt(), osng.ExportToWkt(), gdal.GRA_NearestNeighbour)
     if method == 2:
