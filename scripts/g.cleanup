@@ -1,4 +1,8 @@
 #!/usr/bin/env sh
 
+# Author: Shubert Munthali
+# Copyright (c) 2024 Shubert Munthali
+# Apache License
+
 ALL_MAPS=`grass --exec g.list type=raster pattern="*" sep=, map=.`
 grass --exec g.remove name=$ALL_MAPS type=raster -f

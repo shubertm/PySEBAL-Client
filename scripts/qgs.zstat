@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 
+# Author: Shubert Munthali
+# Copyright (c) 2024 Shubert Munthali
+# Apache License
+
 INPUT=$1
 OUTPUT=$2
 INPUT_RASTER=$3

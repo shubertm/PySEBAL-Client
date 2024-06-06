@@ -15,8 +15,8 @@ import traceback
 path = sys.argv[1]
 lastRow = sys.argv[2]
 inputExcel = r"" + path + ""
-st = 2 # starting row number
-en = int(lastRow) # ending row number
+st = 2 # starting csv_row number
+en = int(lastRow) # ending csv_row number
 
 ####### USER INPUTS FINISH HERE
 

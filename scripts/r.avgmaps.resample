@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 
+# Author: Shubert Munthali
+# Copyright (c) 2024 Shubert Munthali
+# Apache License
+
 FOLDER=$1
 
  ## Resample all daily averages maps

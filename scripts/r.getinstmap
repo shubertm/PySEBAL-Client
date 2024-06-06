@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 
+# Author: Shubert Munthali
+# Copyright (c) 2024 Shubert Munthali
+# Apache License
+
 DATE=$1
 PNAME=$2
 

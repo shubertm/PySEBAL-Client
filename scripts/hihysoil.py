@@ -1,3 +1,7 @@
+# Author: Shubert Munthali
+# Copyright (c) 2024 Shubert Munthali
+# Apache License
+
 import subprocess
 
 input_folder="/home/themystery/Sithembile/PYSEBAL/Data/Soil/Kasinthula"

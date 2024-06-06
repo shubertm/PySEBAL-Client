@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 
+# Author: Shubert Munthali
+# Copyright (c) 2024 Shubert Munthali
+# Apache License
+
 map_path=$1
 n=$(tr '/' '\n' <<< $map_path | wc -l)
 map_name=$(cut -d / -f $n <<< $map_path)

@@ -1,3 +1,9 @@
+/**
+ *  @Author: Shubert Munthali
+ *  @Copyright: 2024 Shubert Munthali
+ *  @Licence: Apache License
+ */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;

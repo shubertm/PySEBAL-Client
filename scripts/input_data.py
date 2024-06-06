@@ -1,3 +1,7 @@
+# Author: Shubert Munthali
+# Copyright (c) 2024 Shubert Munthali
+# Apache License
+
 from openpyxl import load_workbook
 from openpyxl import Workbook
 
