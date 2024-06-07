@@ -5,8 +5,8 @@
 import os
 import input_data
 
-workbook_path="/home/themystery/Sithembile/PYSEBAL/Data/InputEXCEL_v3_3_7_LIN.xlsx"
-meteo_workbook_path = "/home/themystery/Sithembile/PYSEBAL/Data/Meteo/MeteoInput.xlsx"
+workbook_path=""
+meteo_workbook_path = ""
 start_row=2
 end_row=33
 start_col=2

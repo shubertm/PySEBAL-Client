@@ -5,7 +5,7 @@
 import input_data
 import subprocess
 
-workbook_path = "/home/themystery/Sithembile/PYSEBAL/Data/Meteo/MeteoInput.xlsx"
+workbook_path = ""
 start_row=8
 end_row=8
 

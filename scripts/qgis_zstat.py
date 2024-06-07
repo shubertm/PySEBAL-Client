@@ -8,9 +8,9 @@ import input_data
 import csv
 from statistics import mean
 
-input_shape="/home/themystery/Sithembile/PYSEBAL/Data/Kasinthula.shp"
-workbook_path="/home/themystery/Sithembile/PYSEBAL/Data/Meteo/Meteo.xlsx"
-meteo_workbook_path = "/home/themystery/Sithembile/PYSEBAL/Data/Meteo/MeteoInput.xlsx"
+input_shape=""
+workbook_path=""
+meteo_workbook_path = ""
 start_row=2
 end_row=33
 start_col=1
