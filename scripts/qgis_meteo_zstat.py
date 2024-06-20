@@ -56,7 +56,7 @@ for col in range(start_col, end_col +1):
 
             output='/home/themystery/Sithembile/PYSEBAL/Data/Meteo/{}'.format(zfilename)
 
-            subprocess.call(['bash', 'qgs.zstat', '{}'.format(input_shape), '{}'.format(output), '{}'.format(raster)])
+            subprocess.call(['bash', 'qgis.meteo.zstat', '{}'.format(input_shape), '{}'.format(output), '{}'.format(raster)])
 
             if os.path.exists(output):
                 with open(output, 'r') as file:
